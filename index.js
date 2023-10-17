@@ -1,4 +1,9 @@
-module.exports = () => {
-  // ...
-};
-//commit 1
+const mdLinksInstance = require('./lib/app');
+
+mdLinksInstance.mdLinks('./example/readme.md')
+.then(response => {
+  console.log(response);
+}).catch(error => {
+  console.log(error);
+});
+
