@@ -1,7 +1,7 @@
 const mdLinksInstance = require("./lib/app");
 
 mdLinksInstance
-  .mdLinks("./example/readme.md")
+  .mdLinks("./example/probando1.text")
   .then((response) => {
     console.log(response);
   })
