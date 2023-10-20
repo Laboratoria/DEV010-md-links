@@ -1,11 +1,8 @@
 const path = require("path");
 
-const {
-  mdLinks,
-  getAbsolutePath,
-  isMarkdownFile,
-  findLinksInMarkdownFile,
-} = require("../lib/app"); // Importa las funciones a probar
+const { getAbsolutePath, isMarkdownFile } = require("../lib/app"); // Importa las funciones a probar
+const { findLinksInMarkdownFile } = require("../lib/readfile");
+const { mdLinks } = require("../index");
 
 describe("getAbsolutePath", (filePath) => {
   it("debería devolver una ruta absoluta si se le proporciona una ruta relativa", () => {
@@ -19,18 +16,45 @@ describe("getAbsolutePath", (filePath) => {
     const result = getAbsolutePath(absolutePath);
     expect(result).toBe(absolutePath);
   });
+
+  it("debería arrojar un error si filePath no es una cadena", () => {
+    const filePath = 123; // No es una cadena
+    expect(() => getAbsolutePath(filePath)).toThrow(
+      "filePath must be a string"
+    );
+  });
+
+  it("debería arrojar un error si filePath es una cadena vacía", () => {
+    const filePath = "";
+    expect(() => getAbsolutePath(filePath)).toThrow(
+      "filePath must be a string"
+    );
+  });
 });
 
 describe("isMarkdownFile", (filePath) => {
-  it("debería devolver true para extensiones de archivos Markdown", () => {
-    expect(isMarkdownFile("file.md")).toBe(true);
-    expect(isMarkdownFile("file.markdown")).toBe(true);
-    // Agrega más casos de prueba para otras extensiones de archivos Markdown
+  it("debería devolver verdadero cuando la ruta de archivo tenga una extensión válida", () => {
+    const filePath = "/path/to/file.md";
+    const result = isMarkdownFile(filePath);
+    expect(result).toBe(true);
   });
 
   it("debería devolver false para extensiones de archivos que no son Markdown", () => {
-    expect(isMarkdownFile("file.txt")).toBe(false);
-    // Agrega más casos de prueba para extensiones de archivos que no son Markdown
+    const filePath = "/path/to/file.invalid";
+    const result = isMarkdownFile(filePath);
+    expect(result).toBe(false);
+  });
+
+  it("debería devolver falso cuando la ruta no tenga extensión", () => {
+    const filePath = "/path/to/file";
+    const result = isMarkdownFile(filePath);
+    expect(result).toBe(false);
+  });
+
+  it("debe devolver falso cuando la ruta tenga una extensión que no está en la lista de extensiones válidas", () => {
+    const filePath = "/path/to/file.txt";
+    const result = isMarkdownFile(filePath);
+    expect(result).toBe(false);
   });
 });
 
@@ -49,6 +73,7 @@ describe("findLinksInMarkdownFile", (filePath) => {
   });
 });
 
+//revisar estos tests
 describe("mdLinks", (filePath) => {
   it("debería resolverse con un array de enlaces cuando se le proporciona un archivo Markdown válido", () => {
     return mdLinks("./example/probando1.text").then((links) => {
