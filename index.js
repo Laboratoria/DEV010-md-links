@@ -1,3 +1,1 @@
-module.exports = () => {
-  // ...
-};
+// Aquí la función mdlinks que llamará a las otras funciones
