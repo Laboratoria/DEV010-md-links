@@ -33,12 +33,12 @@ function mdLinks(filePath) {
   });
 }
 
-mdLinks()
+mdLinks("./example/probando1.text")
   .then((response) => {
     console.table(response);
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
   })
   .finally(() => {
     console.log("El proceso ha finalizado");
