@@ -1,0 +1,201 @@
+Todas las interacciones con el usuario, operaciones de red, eventos del navegador, ... son asíncronas. Esto quiere decir que tienen que *esperar* (a que ocurra un evento, a que recibamos una respuesta por http, ...) para poder completar su trabajo.
+
+JavaScript permite manejar *asincronía* de una manera elegante gracias a su implementación de funciones y su naturaleza **_non-blocking_** (que no bloquea el hilo - thread - mientras espera a que se complete una tarea asíncrona). En esta unidad veremos **callbacks**, **eventos** y **promesas** como maneras de trabajar con tareas asíncronas.
+
+Preguntas como guía para orientar tus esfuerzos de aprendizaje.:
+
+<aside>
+💡 **¿Qué es una tarea asíncrona?**
+Es una tarea que se ejecuta de manera independiente y no bloquea el flujo principal de un programa. En lugar de esperar a que una tarea se complete antes de continuar con la siguiente, esta permite que múltiples tareas se ejecuten simultáneamente o en paralelo, lo que mejora la eficiencia y la capacidad de respuesta de una aplicación.
+
+</aside>
+
+1. **¿Qué significa bloquear el hilo o thread?**
+   Significa detener su ejecución, generalmente debido a una espera o bloqueo de una tarea. Esto puede hacer que una aplicación parezca congelada si no se gestiona correctamente.
+
+<aside>
+💡 **¿Qué es un callback?**
+Es una función que se pasa como argumento a otra función y se ejecuta después de que de que la función principal haya terminado. facilita la gestión de tareas asíncronas o la respuesta a eventos.
+
+</aside>
+
+1. **¿Qué es un evento?**
+   Es una acción o suceso que ocurre en un programa, como un clic del ratón o una tecla presionada. Los eventos pueden desencadenar respuestas o ejecutar funciones específicas.
+2. **¿Cómo escuchar eventos?**
+   En JavaScript usando el método `addEventListener` en un elemento HTML o en un objeto que emite eventos. Esto permite que tu código reaccione cuando ocurre un evento específico.
+3. **¿Cómo dejar de escuchar eventos?**
+   Usando el método `removeEventListener`. Debes proporcionar la misma función de callback que se usó para agregar el evento.
+
+<aside>
+💡 **¿Qué es una promesa?**
+Una promesa es un objeto en JavaScript que representa un valor futuro **que puede estar disponible o no**. Se utiliza para gestionar operaciones asíncronas y sus resultados, lo que facilita el manejo de tareas asíncronas de manera más ordenada.
+
+</aside>
+
+<aside>
+💡 **¿Cómo usar promesas?**
+Para usar promesas, puedes crear una promesa usando `new Promise()`. Luego, puedes encadenar métodos como `then` y `catch` para manejar los resultados exitosos o los errores.
+
+</aside>
+
+1.  **¿Cómo implementar promesas nuevas?**
+    Puedes implementar promesas nuevas creando una función que devuelve una promesa y luego resolviendo o rechazando esa promesa según el resultado de la operación asíncrona. Por ejemplo:
+
+        ```jsx
+        function miPromesa() {
+            return new Promise((resolve, reject) => {
+                // Realizar una operación asíncrona
+                if (operacionExitosa) {
+                    resolve(resultado);
+                } else {
+                    reject(error);
+                }
+            });
+        }
+
+        ```
+
+2.  **¿Cómo encadenar promesas?**
+    Puedes encadenar promesas utilizando el método `then` para manejar los resultados de una promesa y devolver otra promesa. Esto permite ejecutar tareas en secuencia. Por ejemplo:
+
+        ```jsx
+        miPrimeraPromesa()
+            .then(resultado => {
+                return miSegundaPromesa(resultado);
+            })
+            .then(nuevoResultado => {
+                console.log(nuevoResultado);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ```
+
+        ## CALLBACKS
+
+        En resumen, un callback es una forma de decirle a una función qué hacer después de que haya terminado su trabajo principal, lo que permite manejar tareas asíncronas o eventos de manera eficiente en programación.
+
+        ## **Promesas**
+
+        ### new Promise
+
+        Lo primero es la creación de una promesa a través del código `new Promise(...)`, como puedes ver es un objeto que representa a este dato que puede estar inmediatamente, en el futuro o simplemente no estar. Este objeto para ser creado recibe un *callback*, pero no como todos, sino que uno especial que tiene dos parámetros que veremos a continuación.
+
+        ### Parámetro resolve
+
+        El primer parámetro del *callback* la promesa es una función especial que llamaremos cuando el trabajo lento que hacemos se termina. Con esto se da por terminada la promesa y **los datos que queramos retornar se ponen como parámetros de `resolve`.**
+
+        ### Parámetro reject
+
+        Nuestro trabajo lento puede fallar, es obvio que todo puede fallar (muchas gracias Murphy), por esto tenemos que tener una forma de comunicar que nuestro proceso lento tuvo un error. Las promesas vienen al rescate y nos proveen de **`reject`, una función que podemos llamar en caso de error y que recibe como parámetro.**.. si ya lo adivinaron, **un error** de javascript.
+
+        ### then
+
+        `then` es una función que el usuario de la promesa provee para cuando el proceso lento terminó de ejecutarse correctamente. El número de parámetros que recibe son variables y dependen del creador (es muy importante la comunicación entre ustedes programadoras), generalmente retornan un único parámetro con los datos resultantes. Si queremos anidar promesas, tal como vimos anteriormente, es importante al final de esta función retornar otra promesa. Si en cambio queremos retornar un valor para el siguiente paso, lo haremos de la siguiente forma:
+
+        `//... mucho código antes ...
+        return Promise.resolve(aceptado);
+        }.then(
+        (aceptado) => {
+        // Acá podemos usar el dato que retornamos en el then anterior
+        }
+        );`
+
+        En resumen, el código que has proporcionado crea una promesa exitosa inmediatamente con un valor `aceptado` y luego encadena un **`.then()`** para manejar ese valor una vez que la promesa se resuelva exitosamente. Dentro de la función de callback del **`.then()`**, puedes realizar cualquier acción que necesites con el valor `aceptado` .
+
+        ### catch
+
+        `catch` en tanto, es una función que será ejecutada en caso de que **en cualquier parte de la cadena de then haya una falla**. Sirve para capturar y gestionar los errores que se producen en una cadena de promesas.
+
+        - Cuando se produce un error en cualquier parte de una cadena de promesas (por ejemplo, en un **`.then()`** anterior), la ejecución se detiene en ese punto y se pasa al primer bloque **`catch`** que encuentre en esa cadena.
+        - El bloque **`catch`** permite especificar cómo manejar el error. Puedes proporcionar una función de callback que se ejecutará cuando se capture el error. Esta función puede registrar el error, tomar medidas correctivas o notificar al usuario sobre el problema.
+
+        ## Estado de promesas
+
+        Una promesa puede encontrarse en estos estados:
+
+        - **pending**: Estado inicial, ni terminada exitosamente o rechazada.
+        - **fulfilled**: operación exitosa.
+        - **rejected**: operación fallida o rechazada.
+        - **settled**: la Promise ha sido exitosa o rechazada, pero no está pendiente.
+
+        <aside>
+        💡
+
+        </aside>
+
+        Preguntas como guía para orientar tus esfuerzos de aprendizaje.:
+
+        **¿Qué es el modo estricto en JavaScript?**
+        El modo estricto (strict mode) en JavaScript es una característica que te permite escribir un código más seguro y libre de errores. Habilitándolo, se aplican reglas más estrictas al código, lo que ayuda a detectar y evitar errores comunes. Puedes habilitar el modo estricto escribiendo `"use strict";` al comienzo de un archivo o de una función.
+
+        **¿Qué es un Error y tipos de errores?**
+        Un Error en JavaScript es una señal de que algo ha salido mal durante la ejecución del código. Hay varios tipos de errores, pero los principales son:
+
+        - **Errores de sintaxis:** Ocurren cuando el código no sigue la estructura y reglas del lenguaje.
+        - **Errores de tiempo de ejecución:** Ocurren durante la ejecución, como dividir por cero o acceder a una variable no definida.
+        - **Errores de lógica:** No generan un mensaje de error, pero el programa no funciona como se esperaba debido a un problema en el diseño o la lógica del código.
+
+        **¿Cómo usar try...catch para manejar errores?**`try...catch` es una estructura en JavaScript que permite manejar errores. Colocas el código propenso a errores dentro del bloque `try`, y si ocurre un error, se captura y se maneja en el bloque `catch`. Esto evita que el programa se detenga abruptamente debido a errores.
+
+        ```jsx
+        try {
+          // Código propenso a errores
+        } catch (error) {
+          // Manejo del error
+        }
+
+        ```
+
+        **¿Cómo manejar errores en callbacks?**
+        Para manejar errores en callbacks, puedes utilizar un patrón común que involucra el uso de la variable `error` como primer argumento en la función de callback. Luego, dentro del callback, verificas si `error` tiene un valor y, en caso afirmativo, manejas el error.
+
+        ```jsx
+        function miCallback(error, resultado) {
+          if (error) {
+            // Manejo del error
+          } else {
+            // Trabajo con el resultado
+          }
+        }
+
+        ```
+
+        **¿Cómo manejar errores en promesas?**
+        En promesas, puedes usar el método `.catch()` al final de la cadena de `.then()` para manejar errores que puedan ocurrir en cualquier punto de la cadena de promesas. Si ocurre un error en cualquiera de los `.then()`, el control se pasa al bloque `.catch()`.
+
+        ```jsx
+        miPromesa()
+          .then(resultado => {
+            // Trabajo con el resultado
+          })
+          .catch(error => {
+            // Manejo del error
+          });
+
+        ```
+
+        Esto permite centralizar el manejo de errores para todas las promesas encadenadas en un solo lugar.
+
+        `try...catch` es una estructura en programación que se utiliza para manejar situaciones inesperadas o errores que pueden ocurrir durante la ejecución de un programa.
+
+        - **`try`**: Aquí colocas el código que deseas probar. Son las instrucciones que pueden generar un error.
+        - **`catch`**: Si ocurre un error en el bloque `try`, el programa no se detiene. En su lugar, el control se pasa al bloque `catch`. Dentro del bloque `catch`, puedes escribir instrucciones para manejar el error de una manera controlada.
+        - **`finally`**: Opcionalmente, puedes usar un bloque `finally` después de `catch`. Las instrucciones en `finally` se ejecutan sin importar si ocurrió un error o no. Esto es útil para realizar limpieza o tareas que siempre deben ocurrir, como cerrar archivos o conexiones de bases de datos.
+
+        Aquí tienes un ejemplo:
+
+        ```jsx
+        try {
+          // Intentamos hacer algo que puede causar un error
+          // Si ocurre un error, el control se pasa al bloque catch
+        } catch (error) {
+          // Manejamos el error de una manera específica
+        } finally {
+          // Estas instrucciones se ejecutan siempre, ocurra o no un error
+        }
+
+        ```
+
+        En resumen, `try...catch` te permite ejecutar un código que podría lanzar errores y proporciona un lugar para manejar esos errores de manera controlada, en lugar de que el programa se detenga abruptamente. Luego, el bloque `finally` (si se utiliza) se ejecuta, independientemente de si ocurrió un error o no.
