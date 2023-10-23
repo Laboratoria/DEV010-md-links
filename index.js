@@ -1,13 +1,12 @@
 const mdLinksInstance = require("./lib/app");
 const readFileInstance = require("./lib/readfile");
-// const chalk = require("chalk");
 
 /* validar la ruta del archivo, asegurándose de que sea una cadena, obteniendo la ruta absoluta y
 verificando si es un archivo Markdown. Luego, llama a findLinksInMarkdownFile del módulo readfile
 para buscar enlaces en el archivo.Finalmente, se manejan las promesas con los bloques
 then, catch, y finally, y se exporta la función mdLinks.*/
 
-function mdLinks(filePath) {
+function mdLinks(filePath, validate) {
   return new Promise((resolve, reject) => {
     if (typeof filePath !== "string") {
       reject(new Error("Debe entregar una ruta de archivo válida"));
@@ -23,7 +22,7 @@ function mdLinks(filePath) {
     }
 
     readFileInstance
-      .findLinksInMarkdownFile(absolutePath)
+      .findLinksInMarkdownFile(absolutePath, validate)
       .then((response) => {
         resolve(response);
       })
@@ -33,9 +32,9 @@ function mdLinks(filePath) {
   });
 }
 
-mdLinks("./example/probando1.text")
+mdLinks("./example/probando_true.text", true)
   .then((response) => {
-    console.table(response);
+    console.log(response);
   })
   .catch((error) => {
     console.error(error);

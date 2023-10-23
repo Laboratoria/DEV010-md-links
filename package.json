@@ -17,6 +17,8 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "colors": "^1.4.0"
+    "axios": "^1.5.1",
+    "colors": "^1.4.0",
+    "node-fetch": "^3.3.2"
   }
 }

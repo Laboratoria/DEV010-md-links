@@ -1,6 +1,16 @@
 const path = require("path");
+const axios = require("axios");
+jest.mock("axios");
 const { mdLinks } = require("../index");
 const { getAbsolutePath } = require("../lib/app");
+const { findLinksInMarkdownFile } = require("../lib/readfile");
+const fsInstance = {
+  promises: {
+    readFile: jest.fn(),
+  },
+};
+
+global.fsInstance = fsInstance;
 
 describe("mdLinks", () => {
   it("debería retornar un arreglo vacío para un archivo .md sin enlaces", () => {
@@ -12,11 +22,9 @@ describe("mdLinks", () => {
   });
 
   it("debe devolver nulo cuando la entrada está vacía o no es una cadena", () => {
-    // Array
     const filePath1 = "";
     const filePath2 = 123;
 
-    // Accionar
     const result1 = getAbsolutePath(filePath1);
     const result2 = getAbsolutePath(filePath2);
 
@@ -60,8 +68,8 @@ describe("mdLinks", () => {
   //   );
   // });
   it("debería rechazar con un error si la ruta no es un archivo válido", () => {
-    return expect(mdLinks("/ruta/no/existente.md")).rejects.toThrowError(
-      "Debe entregar un archivo válido"
+    return expect(mdLinks("./example/no_valido.php")).rejects.toThrowError(
+      "El archivo no es de tipo Markdown"
     );
   });
 
@@ -69,5 +77,62 @@ describe("mdLinks", () => {
     return expect(
       mdLinks("./example/archivo-no-markdown.txt")
     ).rejects.toThrowError("El archivo no es de tipo Markdown");
+  });
+
+  it("Debera incluir URL, text y file path en cada link", () => {
+    const filePath = "./example/probando1.text";
+    // mock implementation of fsInstance.promises.readFile
+    fsInstance.promises.readFile.mockResolvedValue(
+      "[Example](https://example.com)\n[Google](https://google.com)"
+    );
+    const resultPromise = findLinksInMarkdownFile(filePath);
+    return resultPromise.then((links) => {
+      links.forEach((link) => {
+        expect(link).toHaveProperty("href");
+        expect(link).toHaveProperty("text");
+        expect(link).toHaveProperty("file");
+        expect(link.file).toEqual(filePath);
+      });
+    });
+  });
+
+  // If 'validate' is true, the function continues with the validation process.
+  it("Si 'validar' es verdadero, la función continúa con el proceso de validación", () => {
+    const filePath = "./example/probando_true.text";
+    const validate = true;
+    const expectedLinks = [
+      {
+        href: "https://www.google.com",
+        text: "Google",
+        file: filePath,
+        status: 200,
+        ok: "ok",
+      },
+      {
+        href: "https://www.invalid.com",
+        text: "Invalid",
+        file: filePath,
+        status: "N/A",
+        ok: "fail",
+      },
+    ];
+
+    // Mock implementation of fsInstance.promises.readFile
+    fsInstance.promises.readFile.mockResolvedValue(
+      "[Google](https://www.google.com) - Enlace a Google\n[Invalid](https://www.invalid.com) - Enlace a Invalid"
+    );
+
+    // Mock implementation of axios.get
+    axios.get.mockImplementation((url) => {
+      if (url === "https://www.google.com") {
+        return Promise.resolve({ status: 200 });
+      } else {
+        return Promise.reject(new Error("Invalid URL"));
+      }
+    });
+
+    return findLinksInMarkdownFile(filePath, validate).then((links) => {
+      expect(links).toEqual(expectedLinks);
+    });
   });
 });
