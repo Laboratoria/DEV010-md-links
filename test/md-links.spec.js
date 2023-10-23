@@ -1,4 +1,5 @@
 const { mdLinks } = require('../index.js')
+const {convertPath, extFile } = ('./lib/app.js')
 
 describe('mdLinks', () => {
  
@@ -9,7 +10,10 @@ describe('mdLinks', () => {
     })
     it ('Debe ejecutar la funcion pathIsAnsolute si la ruta existe', () => {
         return mdLinks('./example/markdown.md').then((result)=>{
-            expect(result).toBe('ruta existe')
+            expect(result).toEqual({
+                convertPath:'C:\\Users\\Asus\\Documents\\Laboratoria\\Proyecto 4\\DEV010-md-links\\example\\markdown.md',
+                extFile:'.md',
+            })
         })
     })
 })
