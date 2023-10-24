@@ -24,8 +24,16 @@ mdLinks('./docs/Diagrama de flujo.drawio.png')
         console.log(result)
     })
     .catch(error => {
-        console.error(error);
+        console.error(error)
     })    
+
+mdLinks('./example/markdown.md') 
+.then(data => {
+    console.log('Este es el contenido del archivo')
+})
+.catch(error => {
+    console.error(error)
+})    
 
     
  
