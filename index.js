@@ -9,7 +9,7 @@ const mdLinks = (validatePath) => {
   return new Promise((resolve, reject) => { // Creo nueva promesa
     if (fs.existsSync(validatePath)) {  // (existsSync)es un modulo para verificar si existe un archivo 
       const { convertPath, extFile } = pathIsAbsolute(validatePath)
-      console.log(convertPath, extFile)
+      resolve({ convertPath, extFile })
     } else {
       reject('la ruta no existe')
     }
