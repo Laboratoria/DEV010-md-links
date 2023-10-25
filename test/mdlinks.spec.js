@@ -136,3 +136,12 @@ describe("mdLinks", () => {
     });
   });
 });
+
+/* jest.mock("axios"): Esto está reemplazando el módulo axios
+con una versión simulada durante las pruebas. En lugar de realizar solicitudes HTTP reales,
+se simulan las respuestas de axios*/
+
+/* fsInstance.promises.readFile.mockResolvedValue(...): Aquí,
+se está simulando el comportamiento de la función
+fs.promises.readFile para que no se lea realmente el contenido
+del archivo durante las pruebas. */
