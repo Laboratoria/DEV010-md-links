@@ -32,12 +32,12 @@ function mdLinks(filePath, validate) {
   });
 }
 
-mdLinks("./example/probando_true.text", true)
+mdLinks("./example/probando3.md", true)
   .then((response) => {
-    console.log(response);
+    console.table(response);
   })
   .catch((error) => {
-    console.error(error);
+    console.log(error);
   })
   .finally(() => {
     console.log("El proceso ha finalizado");

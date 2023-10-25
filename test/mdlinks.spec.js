@@ -61,18 +61,6 @@ describe("mdLinks", () => {
     });
   });
 
-  // it("debería retornar un error para un archivo que no tiene un formato de archivo valido", () => {
-  //   const filePath = "./example/probando.js";
-  //   return expect(mdLinks(filePath)).rejects.toThrowError(
-  //     "El archivo no es de tipo Markdown"
-  //   );
-  // });
-  it("debería rechazar con un error si la ruta no es un archivo válido", () => {
-    return expect(mdLinks("./example/no_valido.php")).rejects.toThrowError(
-      "El archivo no es de tipo Markdown"
-    );
-  });
-
   it("debería rechazar con un error si el archivo no es de tipo Markdown", () => {
     return expect(
       mdLinks("./example/archivo-no-markdown.txt")
@@ -96,7 +84,6 @@ describe("mdLinks", () => {
     });
   });
 
-  // If 'validate' is true, the function continues with the validation process.
   it("Si 'validar' es verdadero, la función continúa con el proceso de validación", () => {
     const filePath = "./example/probando_true.text";
     const validate = true;
@@ -133,6 +120,19 @@ describe("mdLinks", () => {
 
     return findLinksInMarkdownFile(filePath, validate).then((links) => {
       expect(links).toEqual(expectedLinks);
+    });
+  });
+
+  it("debe resolverse con una matriz de objetos que contienen href, texto y propiedades de archivo cuando se le proporciona una ruta de archivo de rebajas válida y la opción de validación es falso", () => {
+    const filePath = "./example/probando3.md";
+    const validate = false;
+
+    return mdLinks(filePath, validate).then((result) => {
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBeGreaterThan(0);
+      expect(result[0]).toHaveProperty("href");
+      expect(result[0]).toHaveProperty("text");
+      expect(result[0]).toHaveProperty("file");
     });
   });
 });

@@ -1,82 +1,26 @@
-# Markdown Links
+[Markdown](https://es.wikipedia.org/wiki/Markdownx)
 
-## Índice
-
-## 1. Preámbulo
-
-[Markdown](https://es.wikipedia.org/wiki/Markdownx) es un lenguaje de marcado
-ligero muy popular entre developers. Es usado en
-muchísimas plataformas que manejan texto plano (GitHub, foros, blogs, etc.) y
-es muy común encontrar varios archivos en ese formato en cualquier tipo de
-repositorio (empezando por el tradicional `README.md`).
-
-Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
-muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
-la información que se quiere compartir.
-
-Dentro de una comunidad de código abierto, nos han propuesto crear una
-herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
-en formato `Markdown`, para verificar los links que contengan y reportar
-algunas estadísticas.
+[Node.js](https://nodejs.org/)
 
 ![md-links](https://github.com/Laboratoria/bootcamp/assets/12631491/fc6bc380-7824-4fab-ab8f-7ab53cd9d0e4)
 
 
-### Recursos
-
 #### Hito 1
 
-* [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
-* [Node.js path - Documentación oficial](https://nodejs.org/api/path.html)
-* [Cómo crear promesas - javascript.info](https://es.javascript.info/promise-basics)
+[Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
+[Node.js path - Documentación oficial](https://nodejs.org/api/path.html)
+[Cómo crear promesas - javascript.info](https://es.javascript.info/promise-basics)
 
-#### Hito 2
 
-* [Validación de URLs con peticiones http - luisrrleal.com](https://luisrrleal.com/blog/como-hacer-peticiones-http-en-javascript)
+[Validación de URLs con peticiones http - luisrrleal.com](https://luisrrleal.com/blog/como-hacer-peticiones-http-en-javascript)
 
 #### Hito 3
 
-* [Cómo iterar un arreglo de promesas - mozilla.org](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+[Cómo iterar un arreglo de promesas - mozilla.org](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
 
-#### Hito 4
 
-* [Tú, yo y package.json](https://medium.com/noders/t%C3%BA-yo-y-package-json-9553929fb2e3)
-* [Cómo crear y publicar packpage - npmjs.com](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-* [Una guía para crear un paquete de línea de comandos NodeJS - medium.com](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 
-#### Hito 5
+(https://medium.com/noders/t%C3%BA-yo-y-package-json-9553929fb2e3)
+[Cómo crear y publicar packpage - npmjs.com](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e
 
-* [Qué es la recursividad y cómo crear funciones recursivas - javascript.info](https://es.javascript.info/recursion)
-
-### Otros recursos
-
-* [Acerca de Node.js - Documentación oficial](https://nodejs.org/es/about/)
-* [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
-* [Asíncronía en js](https://carlosazaustre.es/manejando-la-asincronia-en-javascript)
-* [Patrones para coincidencia de caracteres con expresiones regulares - mozilla.org](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions)
-
-## 9. Para pedir project feedback
-
-* [ ] Un board en github projects con el backlog para la implementación de la
-  librería.
-
-* [ ] un `README.md` con documentación técnica de la librería y una guía de
-  uso e instalación de la librería.
-
-* [ ] un API `mdLinks(path, validate)` con los siguientes requisitos
-  (Hito 1 y 2 son los mínimos):
-
-  - El módulo debe exportar una función que cumpla con la interfaz (API)
-    requerida. (Hito 1)
-  - Deberá implementar el soporte para archivos individuales. (Hito 1)
-  - Deberá implementar la funcionalidad de validación. (Hitos 1 y 2)
-  - Deberá ofrecer soporte para directorios. (Hitos 1 al 3)
-  - Deberá ofrecer soporte para directorios que pueden contener otros
-    directorios. (Hitos 1 al 5)
-
-* [ ] un CLI (Command Line Interface) que se ejecuta sin errores
-  y tiene el output esperado. Además acepta los parámetros
-  `--validate` y `--stats`. Y expone un ejecutable
-  md-links en el path (configurado en el `package.json`)
-* [ ] Pasa tests y linters (`npm test`). Tests unitarios cubren un mínimo
-  del 70% de coverage tests, es decir statements, functions, lines y branches.
