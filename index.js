@@ -1,9 +1,10 @@
-const fs = require('fs');
+const app = require('./lib/app');
 
-const mdLinks = (ruta, options) => {
-  return new Promise((resolve, reject) => {
-  // Identificar si la ruta existe
-  if (fs.existsSync(ruta)){
+const mdLinks = (ruta) => {
+new Promise((resolve, reject)) => {
+  const isAbsolute = app.isAbsolute(ruta);
+  if (!isAbsolute) {
+    app. 
 // revisar si la ruta es absoluta
 // probar si la ruta es absoluta 
 // si es un directorio filtrar los archivos md.
@@ -11,8 +12,7 @@ const mdLinks = (ruta, options) => {
     reject('Ruta no válida');
   }
   });
-};
-
+});
 module.exports = {
     mdLinks
 };
