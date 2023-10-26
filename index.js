@@ -1,18 +1,27 @@
 const app = require('./lib/app');
+const path = require('path');
 
-function mdLinks(ruta) {
+function mdLinks(filePath) {
 new Promise((resolve, reject) => {
-  const isAbsolute = app.isAbsolute(ruta);
+  const isAbsolute = path.resolve(filePath);
+
   if (!isAbsolute) {
-    app.isAbsolute(ruta);
-// revisar si la ruta es absoluta
-// probar si la ruta es absoluta 
-// si es un directorio filtrar los archivos md.
-  } else {
-    reject('Ruta no válida');
-  }
+  filePath = path.transformPath(filePath);
+  } 
+  path.existPath(filePath);
+
+  path.readFiles(filePath)
+    .then((data) => {
+
+      resolve(data);
+    })
+    .catch((error) => {
+      reject('No existe', error);
+    });
+    
   });
 };
+
 
 module.exports = {
     mdLinks
