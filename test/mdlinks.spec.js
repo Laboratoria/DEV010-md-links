@@ -21,21 +21,26 @@ describe("mdLinks", () => {
     });
   });
 
-  it("debe devolver nulo cuando la entrada está vacía o no es una cadena", () => {
-    const filePath1 = "";
+  it("deberia rechazar cuando la ruta está vacía o no es una cadena", () => {
+    //468ms
+    const filePath = "";
+    const validate = true;
+    expect(mdLinks(filePath, validate)).rejects.toThrow(
+      "Debe entregar una ruta de archivo válida"
+    );
+
     const filePath2 = 123;
-
-    const result1 = getAbsolutePath(filePath1);
-    const result2 = getAbsolutePath(filePath2);
-
-    // validar
-    expect(result1).toBeNull();
-    expect(result2).toBeNull();
+    expect(mdLinks(filePath2, validate)).rejects.toThrow(
+      "Debe entregar una ruta de archivo válida"
+    );
   });
 
-  it("debería rechazar con un error si la ruta no es una cadena", () => {
-    return expect(mdLinks(123)).rejects.toThrowError(
-      "Debe entregar una ruta de archivo válida"
+  it("Se rechaza con un error cuando la ruta del archivo no existe", () => {
+    const filePath = "nonexistentFilePath.md";
+    const validate = false;
+
+    return expect(mdLinks(filePath, validate)).rejects.toThrowError(
+      "La ruta indicada no existe"
     );
   });
 
@@ -61,10 +66,12 @@ describe("mdLinks", () => {
     });
   });
 
-  it("debería rechazar con un error si el archivo no es de tipo Markdown", () => {
-    return expect(
-      mdLinks("./example/archivo-no-markdown.txt")
-    ).rejects.toThrowError("El archivo no es de tipo Markdown");
+  it(" debería rechazar con un error si el archivo no es de tipo Markdown", () => {
+    const filePath = "./example/no_valido.php";
+    const validate = true;
+    return expect(mdLinks(filePath, validate)).rejects.toThrow(
+      "El archivo no es de tipo Markdown"
+    );
   });
 
   it("Debera incluir URL, text y file path en cada link", () => {
@@ -123,7 +130,7 @@ describe("mdLinks", () => {
     });
   });
 
-  it("debe resolverse con una matriz de objetos que contienen href, texto y propiedades de archivo cuando se le proporciona una ruta de archivo de rebajas válida y la opción de validación es falso", () => {
+  it("Debe resolverse con un arreglo de objetos que contiene href, texto y propiedades de archivo cuando se le proporciona una ruta de archivo de rebajas válida y la opción de validación es falso", () => {
     const filePath = "./example/probando3.md";
     const validate = false;
 
@@ -135,6 +142,52 @@ describe("mdLinks", () => {
       expect(result[0]).toHaveProperty("file");
     });
   });
+
+  it("Debe resolverse con un array de archivos cuando se le proporciona un directorio válido con archivos markdown", () => {
+    const filePath = "./example/subfiles";
+    const validate = false;
+
+    return mdLinks(filePath, validate).then((result) => {
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBeGreaterThan(0);
+      expect(result.every((path) => typeof path === "string")).toBe(true);
+    });
+  });
+
+  it("Debe resolverse con un arreglo vacio cuando se le proporciona un directorio válido que no contiene archivos", () => {
+    const filePath = "./emptyexample";
+    const validate = false;
+
+    return mdLinks(filePath, validate).then((result) => {
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(0);
+    });
+  });
+
+  // it("debería extraer enlaces de archivos .md en un directorio con subdirectorios", () => {
+  //   const filePath = "./example/subfiles";
+  //   const validate = true;
+
+  //   const result = mdLinks(filePath, validate);
+
+  //   expect(result).resolves.toEqual([
+  //     {
+  //       file: "./example/subfiles/file2.md",
+  //       href: "https://www.linkedin.com/",
+  //       text: "Example",
+  //     },
+  //     {
+  //       file: "./example/subfiles",
+  //       href: "https://google.com",
+  //       text: "Google",
+  //     },
+  //     {
+  //       file: "./example/subfiles",
+  //       href: "https://github.com",
+  //       text: "GitHub",
+  //     },
+  //   ]);
+  // });
 });
 
 /* jest.mock("axios"): Esto está reemplazando el módulo axios

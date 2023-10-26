@@ -1,0 +1,7 @@
+#### Hito 1
+
+- [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
+- [Node.js path - Documentación oficial](https://nodejs.org/api/path.html)
+- [Cómo crear promesas - javascript.info](https://es.javascript.info/promise-basics)
+- [Enlace incorrecto](https://www.ejemplo.com/enlace-incorrecto)
+- [Validación de URLs con peticiones http - luisrrleal.com](https://luisrrleal.com/blog/como-hacer-peticiones-http-en-javascript)
