@@ -1,16 +1,15 @@
 const app = require('./lib/app');
-const path = require('path');
 
 function mdLinks(filePath) {
 new Promise((resolve, reject) => {
-  const isAbsolute = path.resolve(filePath);
+ // const isAbsolute = path.resolve(filePath);
 
-  if (!isAbsolute) {
-  filePath = path.transformPath(filePath);
+  if (!app.isAbsolute(filePath)) {
+    filePath = app.transformPath(filePath);
   } 
-  path.existPath(filePath);
+  app.existPath(filePath);
 
-  path.readFiles(filePath)
+  app.readFiles(filePath)
     .then((data) => {
 
       resolve(data);
@@ -21,7 +20,6 @@ new Promise((resolve, reject) => {
     
   });
 };
-
 
 module.exports = {
     mdLinks
