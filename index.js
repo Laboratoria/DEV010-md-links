@@ -9,12 +9,13 @@ let colors = require('colors/safe');
 //     // => [{ href, text, file }, ...]
 //   })
 //   .catch(console.error);
-// module.exports = () => {
-//   // ...
-// };
-// aqui vive mdlinks, si se necesita una función se manda a llmar con un requiere
+
+
 const mdlinks = (route) => {
   return new Promise((resolve,reject)=>{
+    if (app.isAbsolute(route)){
+      //regresar la ruta
+    } else{
     const absRouteTransform = app.convertPath(route);
     if(app.exist(absRouteTransform)){
       if(app.isCompExt(absRouteTransform)){
@@ -26,23 +27,13 @@ const mdlinks = (route) => {
       reject(colors.red("Route does not exists"))
     }
 
-  })
+  }})
 }
 
 mdlinks('lib/ReadmeExam.md')
 
-//   const isAbsolute = pathFunctions.isAbsolute(route);}
-//  if (!isAbsolute){
-//   const absolute =pathFuncion.convertAbsolute(route)}
 
 
-//   return new Promise((resolve, reject) => {
-//   }
-// }
 
-//para ver errores
 
-// mdLinks('Readme.ms')
-// .then (( result) =>{
-//   console.log({Rresult})
-// })
+module.exports = {mdlinks};
