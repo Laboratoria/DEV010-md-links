@@ -1,30 +1,36 @@
-//CommondJS require module
+const fs = require('fs');
+const { isAbsolute, extractMarkdown, validateLinks } = require('./lib/app.js');
 
-const fs = require('fs')
-const { isAbsolute, extractMarkdown } = require('./lib/app.js')
+const mdLinks = (filePath, validate) => {
+  return new Promise((resolve, reject) => {
+    if (fs.existsSync(filePath)) { //Identifica si la ruta existe de manera sincrónica
+      const { absolutePath, extName } = isAbsolute(filePath);
 
-const mdLinks = (filePath) => { // Crea función
-return new Promise((resolve, reject) => {
-  if(fs.existsSync(filePath)) {  //Verifica si la ruta existe
-    const { absolutePath, extName } = isAbsolute(filePath);
-    if (['.md', '.mkd', '.mdwn', '.mdown', '.mdtxt', '.mdtext', '.markdown', '.text'].includes(extName)) { //Verifica si la extensión markdown es absoluta
-    fs.promises //módulo que sirve para interactuar con el sistema de archivos
-    .readFile(absolutePath, 'utf8') //Leer el archivo
-    .then((markdownFile) => {
-      const links = extractMarkdown(markdownFile, absolutePath);
-      resolve(links);
-    })
-    .catch((error) => {
-      reject(error);
-    });
+      if (['.md', '.mkd', '.mdwn', '.mdown', '.mdtxt', '.mdtext', '.markdown', '.text'].includes(extName)) {
+        //El archivo es de tipo markdown continua con la lectura
+        fs.promises
+          .readFile(absolutePath, 'utf8')
+          .then((markdownFile) => {
+            const links = extractMarkdown(markdownFile, absolutePath);
+
+            if (validate) {
+              validateLinks(links)
+                .then((validateLinks) => resolve(validateLinks))
+                .catch((error) => reject(error));
+            } else {
+              resolve(links); //Resuelve los links que no son válidos
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      } else {
+        reject('No es un archivo markdown');
+      }
     } else {
-    reject('No es un archivo markdown')
-  }
-  } else {
-    reject('La ruta no existe'); // Sino existe la ruta, rechaza la promesa
-  }
-}); 
+      reject('La ruta no existe');
+    }
+  });
 };
 
-module.exports =
-  mdLinks;
+module.exports = mdLinks;
