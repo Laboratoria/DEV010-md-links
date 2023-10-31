@@ -121,7 +121,7 @@ describe("mdLinks", () => {
       if (url === "https://www.google.com") {
         return Promise.resolve({ status: 200 });
       } else {
-        return Promise.reject(new Error("Invalid URL"));
+        return Promise.reject(new Error("status 500"));
       }
     });
 

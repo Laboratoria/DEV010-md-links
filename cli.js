@@ -16,7 +16,7 @@ mdLinks("./example/probando3.md", false)
     console.log(error);
   });
 
-mdLinks("")
+mdLinks("./example/subfiles")
   .then((response) => {
     console.table(response);
   })
