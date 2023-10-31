@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { mdLinks } = require("./index");
 const args = process.argv.slice(2); // Elimina los primeros dos argumentos que son "node" y el nombre del script
 const filePath = args[0]; //Extraer el primer argumento
@@ -18,9 +20,11 @@ function displayLink(link) {
   const shortenedText =
     link.text.length > 50 ? link.text.slice(0, 50) + "..." : link.text; //texto del enlace !no sea demasiado largo.
   console.log(
-    chalk.bgGreenBright.bold(filePath),
+    chalk.greenBright(filePath),
     chalk.blueBright(link.href),
-    chalk.magentaBright(shortenedText)
+    chalk.magentaBright(shortenedText),
+    chalk.cyanBright.bold(link.status),
+    chalk.whiteBright.bold(link.ok)
   );
 }
 
@@ -30,12 +34,12 @@ function displayStats(links) {
   /* crea un conjunto (Set) llamado uniqueLinks. Se utiliza el método map para extraer las URLs
   de cada objeto de enlace en la lista links y luego se convierte en un conjunto,
   lo que elimina automáticamente las duplicaciones. Esto nos da una colección de URLs únicas.*/
-  console.log(chalk.cyanBright("Cantidad de links:", links.length));
-  console.log(chalk.greenBright("Enlaces únicos:", uniqueLinks.size));
   const validLinks = links.filter((link) => link.message === "Ok"); //objetos de enlace cuya propiedad message es igual a "Ok".
-  console.log(chalk.magentaBright("Enlaces válidos:", validLinks.length));
   const brokenLinks = links.filter((link) => link.message === "Fail"); //objetos cuya propiedad message es igual a "fail". */
+  console.log(chalk.cyanBright("Cantidad de links:", links.length));
+  console.log(chalk.magentaBright("Enlaces válidos:", validLinks.length));
   console.log(chalk.redBright("Enlaces rotos:", brokenLinks.length));
+  console.log(chalk.greenBright("Enlaces únicos:", uniqueLinks.size));
 }
 
 mdLinks(filePath, options.validate)

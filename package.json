@@ -13,13 +13,16 @@
     "jest": "^29.7.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --coverage",
-    "karla": "node index.js"
+    "start": "node mdlinks.js",
+    "test": "jest --coverage"
+  },
+  "bin": {
+    "mdlinks": "./cli.js"
   },
   "dependencies": {
     "axios": "^1.5.1",
     "colors": "^1.4.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "mdlinks": "github:Kaquev/md-links"
   }
 }
