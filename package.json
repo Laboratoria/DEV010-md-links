@@ -24,13 +24,26 @@
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
     "eslint": "^7.32.0",
-    "jest": "^29.7.0"
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.0.2"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit":"lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix"
+    ]
   },
   "dependencies": {
-    "markdown-it": "^13.0.2",
-    "marked": "^9.1.2"
+    "marked": "^9.1.4"
   }
 }
