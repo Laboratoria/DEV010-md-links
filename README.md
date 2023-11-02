@@ -1,4 +1,6 @@
-# mdlinks - Analizador de enlaces en archivos Markdown
+# mdlinks
+
+## Analizador de enlaces en archivos Markdown
 
 ## Índice
 
@@ -14,11 +16,9 @@ mdlinks es una herramienta de línea de comandos y una librería de Node.js que 
 
 ## 2. Instalacion
 
-Para utilizar mdlinks como librería en tus proyectos o como una herramienta de línea de comandos, sigue estos pasos:
+Para utilizar mdlinks ingresa esta linea de comando en tu terminal:
 
-npm install Kaquev/md-links
-
-Tambien puedes usar opciones para personalizar la salida, como --validate para verificar la validez de los enlaces y --stats para obtener estadísticas sobre los enlaces.
+`npm install kaquev/md-links`
 
 ## 3. Uso
 
@@ -33,41 +33,45 @@ Confirmación o negación de la existencia del archivo en la computadora.
 Un arreglo de archivos Markdown encontrados.
 Cada archivo Markdown encontrado contendrá las siguientes propiedades:
 
-file: Ruta del archivo donde se encontró el link.
-href: URL encontrada.
-text: Texto que aparecía dentro del link (<a>).
+- file: Ruta del archivo donde se encontró el link.
+- href: URL encontrada.
+- text: Texto que aparecía dentro del link (<a>)
 
-Ejemplo de resultado:
+#### Ejemplo de resultado:
 
-./example/archivodeprueba.md https://www.google.com Google
+- ./example/archivodeprueba.md https://www.google.com Google
 
 Podemos observar que me entrega las propiedades mencionadas.
 
-file: ./example/archivodeprueba.md
-href: https://www.google.com
-texto: Google
+- file: ./example/archivodeprueba.md
+- href: https://www.google.com
+- texto: Google
 
-# Opciones
+#### Opciones
 
-Puedes usar varias opciones para personalizar la salida, como --validate para verificar la validez de los enlaces y --stats para obtener estadísticas sobre los enlaces.
+Puedes usar varias opciones para personalizar la salida, como `--validate `para verificar la validez de los enlaces y`--stats`para obtener estadísticas sobre los enlaces.
 
---validate: Verifica la validez de los enlaces (status HTTP) y muestra el resultado.
+`--validate` Verifica la validez de los enlaces (status HTTP) y muestra el resultado.
 
-Ejemplo, mdlinks ./example/archivodeprueba.md --validate
+Ejemplo
 
-Resultado:
-
-./example/probando3.md https://www.google.com Google 200 ok
-./example/probando3.md https://www.openai.com OpenAI 200 ok
-./example/probando3.md https://github.com GitHub 200 ok
-
---stats: Muestra estadísticas sobre los enlaces encontrados en el archivo.
-
-Ejemplo, mdlinks ./example/archivodeprueba.md --stats
+- mdlinks ./example/archivodeprueba.md `--validate`
 
 Resultado:
 
-Cantidad de links: 3
-Enlaces válidos: 0
-Enlaces rotos: 0
-Enlaces únicos: 3
+- ./example/archivodeprueba.md https://www.google.com Google 200 ok
+- ./example/archivodeprueba.md https://www.openai.com OpenAI 200 ok
+- ./example/archivodeprueba.md https://github.com GitHub 200 ok
+
+`--stats ` Muestra estadísticas sobre los enlaces encontrados en el archivo.
+
+Ejemplo
+
+- mdlinks ./example/archivodeprueba.md `--stats`
+
+Resultado:
+
+- Cantidad de links: 3
+- Enlaces válidos: 0
+- Enlaces rotos: 0
+- Enlaces únicos: 3
