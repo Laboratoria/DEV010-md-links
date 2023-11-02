@@ -1,50 +1,68 @@
-// vivira MD-LINKS 
-const fs = require('fs') //file -system modulo que permite leer archivos
-const { pathIsAbsolute, isMarkdown } = require('./lib/app.js')
+// vivira MD-LINKS
+const fs = require('fs') // file -system modulo que permite leer archivos
 
+const { pathIsAbsolute, isMarkdown, pathIsOk } = require('./lib/app.js')
 
-const mdLinks = (Path) => {
-  // console.log(Path);
+const mdLinks = (path, validate = false) => { // (false) valor predeterminado de validate
+  // console.log(Path)
   return new Promise((resolve, reject) => { // Creo nueva promesa
-    if (fs.existsSync(Path)) {  //(existsSync)es un modulo para verificar si existe un archivo 
-      const convertPath = pathIsAbsolute(Path) // Obtiene Ruta absoluta
-      const isMarkdownPath = isMarkdown(Path) // valida si la ruta es markdown
+    if (fs.existsSync(path)) { // (existsSync)es un modulo para verificar si existe un archivo
+      const convertPath = pathIsAbsolute(path) // Obtiene Ruta absoluta
+      const isMarkdownPath = isMarkdown(path) // valida si la ruta es markdown
 
-      if (isMarkdownPath)
-        fs.readFile(Path, 'utf8', (error, data) => { // leer el archivo (error, data) es una funcion que devuelve una llamada
+      if (isMarkdownPath) {
+        fs.readFile(path, 'utf8', (error, data) => { // leer el archivo (error, data) es una funcion que devuelve una llamada
           if (error) {
             reject('no se pudo leer el archivo')
           } else {
-            const urlRex = /https?:\/\/[^\s]+/g // Uctilizo expresiones regulares para identificar links
-            const links = data.match(urlRex) // (match) lo uctilizo para buscar en el archivo
-            //console.log(links)
+            const urlRex = /https?:\/\/[^\s]+/g // Utilizo expresiones regulares para identificar links
+            const links = data.match(urlRex) // (match) lo utilizo para buscar en el archivo
+            console.log(links)
             if (links) {
-              const file = Path
+              const file = path
               const textRex = /\[([^\]]+)\]\([^)]+\)/g // ([^\]]+) captura texto entre corchetes seguidos de  parentesis
               const textMatches = data.match(textRex) // se verifica si hay coincidencias entre el texto entre links y lo que esta dentro del corchete
-              //console.log(textMatches) 
+              // console.log(textMatches)
               if (textMatches) {
-                const linkObjects = links.map((link, index) => { // (map) transforma cada elemento de un arreglo y devuelve uno nuevo (index) indice cambia a medida que se itera sobre los elementos
-                  const textMatch = textMatches[index].match(/\[([^\]]+)\]/) //busca y captura el texto entre corchetes 
-                  const text = textMatch ? textMatch[1] : '' // (textMatch ?) forma abreviada de escribir una estructura condicional 
-                  /* let text
-                  if (textMatch) {
-                    text = textMatch[1]
+                const linkPromises = links.map((link, index) => { // (map) transforma cada elemento de un arreglo y devuelve uno nuevo, (index) indice cambia a medida que se itera sobre los elementos
+                  link = link.slice(0, -2)
+                  const textMatch = textMatches[index].match(/\[([^\]]+)\]/) // busca y captura el texto entre corchetes
+                  const text = textMatch ? textMatch[1] : '' // (textMatch ?) forma abreviada de escribir una estructura condicional
+                  if (validate) {
+                    return pathIsOk(link).then((status) => {
+                      if (status >= 200 && status < 400) {
+                        return {
+                          href: link,
+                          text,
+                          file,
+                          status,
+                          ok: 'ok'
+                        }
+                      } else {
+                        return {
+                          href: link,
+                          text,
+                          file,
+                          status,
+                          fail: 'fail'
+                        }
+                      }
+                    })
                   } else {
-                    text = ''
-                  } */
-                  return {
-                    href: link,
-                    text: text,
-                    file: file,
-                  }  
+                    return {
+                      href: link,
+                      text,
+                      file
+                    }
+                  }
                 })
-                //console.log(linkObjects)
-                resolve({
-                  convertPath,
-                  isMarkdown: true,
-                  content: data,
-                  links: linkObjects,
+                Promise.all(linkPromises).then((linkObjects) => {
+                  resolve({
+                    convertPath,
+                    isMarkdown: true,
+                    content: data,
+                    links: linkObjects
+                  })
                 })
               }
             } else {
@@ -52,13 +70,13 @@ const mdLinks = (Path) => {
             }
           }
         })
+      }
     } else {
       reject('la ruta no existe')
     }
   }
   )
 }
-
 
 module.exports = {
   mdLinks
