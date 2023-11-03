@@ -1,5 +1,4 @@
 const { mdLinks } = require('../index.js')
-const { describe, it, expect } = require('@jest/globals')
 
 describe('mdLinks', () => {
   it('Debe rechazar cuando el path no existe', () => {
@@ -35,15 +34,19 @@ describe('error', () => {
   })
 })
 
-/* describe('textMatches', () => {
-  it('Debe verificar si se extraen los enlaces y texto entre corchetes correctamente', () => {
-    textMatches.mockmockResolvedValue({})
-    const links = ['https://example.com', 'https://example2.com']
-    const textMatchesMock = ['[Texto 1]', '[Texto 2]']
-    const linkObjects = textMatches(textMatchesMock, links)
+describe('processLink', () => {
+  it('debe devolver el objeto correcto para un enlace exitoso', () => {
+    axios.get = jest.fn().mockResolvedValue({ status: 200 })
 
-    expect(linkObjects).toEqual([
-      { href: 'https://example.com', text: 'Texto 1', file: 'example.md' }
-    ])
+    return processLink('https://example.com', 'Example', 'example.txt')
+      .then((result) => {
+        expect(result).toEqual({
+          href: 'https://example.com',
+          text: 'Example',
+          file: 'example.txt',
+          status: 200,
+          ok: 'ok'
+        })
+      })
   })
-}) */
+})

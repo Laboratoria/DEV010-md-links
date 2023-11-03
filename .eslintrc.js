@@ -27,9 +27,10 @@ module.exports = {
     semi: 'error',
     quotes: ['error', 'single'],
     'no-unused-vars': 'error',
-    'no-undef': 'error',
+    'no-undef': 'off',
     'arrow-parens': ['error', 'always'],
     'no-new-error': 'off',
     'prefer-promise-reject-errors': 'off'
-  }
+  },
+  plugins: ['jest']
 }

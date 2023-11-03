@@ -17,7 +17,6 @@ const mdLinks = (path, validate = false) => { // (false) valor predeterminado de
           } else {
             const urlRex = /https?:\/\/[^\s]+/g // Utilizo expresiones regulares para identificar links
             const links = data.match(urlRex) // (match) lo utilizo para buscar en el archivo
-            console.log(links)
             if (links) {
               const file = path
               const textRex = /\[([^\]]+)\]\([^)]+\)/g // ([^\]]+) captura texto entre corchetes seguidos de  parentesis
