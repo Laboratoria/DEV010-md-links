@@ -1,6 +1,7 @@
 const { mdLinks } = require('../index.js')
 const { pathIsOk } = require('../lib/app.js')
 
+// Primer Hito
 describe('mdLinks', () => {
   it('Debe rechazar cuando el path no existe', () => {
     return mdLinks('/ruta/a/verificar').catch((error) => {
@@ -35,9 +36,26 @@ describe('error', () => {
   })
 })
 
+// Segundo Hito
 describe('pathIsOk', () => {
   it('debe devolver el status de manera correcta segun el link', async () => {
-    const respuestaOk = await pathIsOk('https://example.com')
+    const respuestaOk = await pathIsOk('https://www.laboratoria.la/')
     expect(respuestaOk).toEqual(200)
+  })
+  it('Si es valido el link debe retornar un array con (href, text, file, status, ok)', async () => {
+    const link = './example/markdown.md'
+    const validate = true
+    const text = 'Markdown'
+    const file = './example/markdown.md'
+
+    const result = await mdLinks(link, validate, text, file)
+    const validateConditions = result.links.find((link) => link.status === 200 && link.status >= 200 && link.status < 400)
+    expect(validateConditions).toEqual({
+      href: 'https://nodejs.org/',
+      text: 'Node.js',
+      file: './example/markdown.md',
+      status: 200,
+      ok: 'ok'
+    })
   })
 })
