@@ -1,4 +1,5 @@
 const { mdLinks } = require('../index.js')
+const { pathIsOk } = require('../lib/app.js')
 
 describe('mdLinks', () => {
   it('Debe rechazar cuando el path no existe', () => {
@@ -34,19 +35,9 @@ describe('error', () => {
   })
 })
 
-describe('processLink', () => {
-  it('debe devolver el objeto correcto para un enlace exitoso', () => {
-    axios.get = jest.fn().mockResolvedValue({ status: 200 })
-
-    return processLink('https://example.com', 'Example', 'example.txt')
-      .then((result) => {
-        expect(result).toEqual({
-          href: 'https://example.com',
-          text: 'Example',
-          file: 'example.txt',
-          status: 200,
-          ok: 'ok'
-        })
-      })
+describe('pathIsOk', () => {
+  it('debe devolver el status de manera correcta segun el link', async () => {
+    const respuestaOk = await pathIsOk('https://example.com')
+    expect(respuestaOk).toEqual(200)
   })
 })
