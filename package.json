@@ -1,10 +1,11 @@
 {
-  "name": "md-links",
+  "name": "md-links-kr",
   "version": "0.1.0",
-  "description": "Libreria para analizar enlaces en archivos Markdown",
+  "description": "Library for parsing links in Markdown files",
   "author": "Knelia Rodríguez",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "index.js",
+  "homepage": "https://github.com/KneRodri/DEV010-md-links",
   "bin": {
     "md-links": "bin/md-links.js"
   },
@@ -13,7 +14,7 @@
   },
   "keywords": [
     "markdown",
-    "analizador",
+    "analyzer",
     "links"
   ],
   "bootcamp": {
@@ -24,6 +25,8 @@
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.6.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lint-staged": "^15.0.2"
@@ -35,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit":"lint-staged"
+      "pre-commit": "npm run test && npm run eslint"
     }
   },
   "lint-staged": {
@@ -44,6 +47,7 @@
     ]
   },
   "dependencies": {
-    "marked": "^9.1.4"
+    "marked": "^9.1.4",
+    "mocha": "^10.2.0"
   }
 }
