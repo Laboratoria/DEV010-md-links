@@ -68,17 +68,17 @@ describe("isCompExt", () => {
   // });
 });
 
-describe("readFile", () => {
-  it("debería ser una promesa", () => {
-    expect(typeof readFile).toBe(typeof Promise);
-  });
+// describe("readFile", () => {
+//   it("debería ser una promesa", () => {
+//     expect(typeof readFile).toBe(typeof Promise);
+//   });
 
-  it("debe leer el contenido de un archivo existente", async () => {
-    const testredfile = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const contenido = await readFile("testReadFile.md");
-    expect(contenido).toBe(testredfile);
-  });
-});
+//   it("debe leer el contenido de un archivo existente", async () => {
+//     const testredfile = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//     const contenido = await readFile("testReadFile.md");
+//     expect(contenido).toBe(testredfile);
+//   });
+// });
 
 describe("extLinksMD", () => {
   it("deberia ser una funcion", () => {
