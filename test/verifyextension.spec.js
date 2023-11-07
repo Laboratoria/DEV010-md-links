@@ -1,3 +1,4 @@
+
 const mdwnExtension = require("../lib/verifyExtension");
 
 describe("isMdwnExtension", () => {
