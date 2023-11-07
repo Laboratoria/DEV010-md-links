@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const mdwnExtension = require("../lib/verifyExtension"); // Importa la función mdwnExtension desde un archivo llamado "verifyExtension" en una ubicación relativa.
+=======
+
+const mdwnExtension = require("../lib/verifyExtension");
+>>>>>>> main
 
 describe("isMdwnExtension", () => {
   // Comienza la descripción de las pruebas para la función mdwnExtension.
