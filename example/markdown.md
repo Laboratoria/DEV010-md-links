@@ -2,5 +2,5 @@
 ligero muy popular entre developers.
 *[Node.js](https://nodejs.org/).
 * Google  [Enlace a Google](https://www.google.com/).
-* Youtube [Enlace a youtube](https://www.youtube.coms/).
+* Youtube [Enlace a youtube](https://www.youtube.com/).
 * Laboratoria  [Enlace a Laboratiria](https://www.laboratoria.la/).

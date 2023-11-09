@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 const { mdLinks } = require('./index.js')
 
+const [,, ...args] = process.argv
 /* mdLinks('/ruta/a/verificar')
   .then((result) => {
     console.log('Ruta absoluta:', result.convertPath)
@@ -8,8 +11,7 @@ const { mdLinks } = require('./index.js')
   .catch((error) => {
     console.error(error)
   }) */
-
-mdLinks('./example/markdown.md', true)
+mdLinks(args[0], true)
   .then((result) => {
     console.log(result)
   })
@@ -17,6 +19,7 @@ mdLinks('./example/markdown.md', true)
     console.error(error)
   })
 
+  
 /* mdLinks('./docs/Diagrama de flujo.drawio.png')
   .then((result) => {
     console.log(result)
@@ -25,7 +28,7 @@ mdLinks('./example/markdown.md', true)
     console.error(error)
   }) */
 
-/* mdLinks('./README.md', true)
+/*mdLinks('./README.md', true)
   .then((result) => {
     console.log(result)
   })
@@ -33,7 +36,7 @@ mdLinks('./example/markdown.md', true)
     console.error(error)
   })
 
-mdLinks('./README.md')
+/*mdLinks('./example/markdown.md')
   .then((data) => {
     console.log('Este es el contenido del archivo')
   })

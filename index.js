@@ -80,4 +80,4 @@ const mdLinks = (path, validate = false) => { // (false) valor predeterminado de
 module.exports = {
   mdLinks
 
-}
+} 

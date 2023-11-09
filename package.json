@@ -24,5 +24,8 @@
   },
   "dependencies": {
     "axios": "^1.6.0"
-  }
+  },
+  "bin": {
+    "mdlinks2d": "./cli.js"
+  } 
 }
