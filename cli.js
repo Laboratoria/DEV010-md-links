@@ -4,44 +4,49 @@ const { mdLinks } = require('./index.js')
 
 const [,, ...args] = process.argv
 
-const validate = args.indexOf('--validate')// (indexOf) Busca un valor en especifico
+const validate = args.includes('--validate')
 const stats = args.includes('--stats')
 
-if (stats && validate !== -1){
-  mdLinks(args[0],false)
+if (stats && validate){
+  mdLinks(args[0],validate)
   .then((result) => {
   const totalLinks = result.links.length
   const linkUnique = []
   const totalinksFail = []
+
   result.links.forEach((link)=> {
     if(!linkUnique.includes(link.href)){
       linkUnique.push(link.href)
     }
-  
-    if ((link.status >= 200 && link.status < 400)){
+    if (( link.status >= 400)){
       totalinksFail.push(link.href)
     }
-console.log(`hollll${totalinksFail}`)
   })
   const unique = linkUnique.length
   const linkFail = totalinksFail.length
 
-
-  console.log(totalLinks)
   console.log(`total: ${totalLinks}`)
   console.log(`unique: ${unique}`)
   console.log(`broken: ${linkFail}`)
   })
 }
  else if(stats){
-  mdLinks(args[0], false)
+  mdLinks(args[0])
   .then((result) => {
   const tolalLinks = result.links.length
-  console.log(`total: ${tolalLinks}`)
-  console.log(`unique: ${tolalLinks}`)
+  const linkUnique = []
+  result.links.forEach((link)=> {
+    if(!linkUnique.includes(link.href)){
+      linkUnique.push(link.href)
+    }
   })
-}else if (validate !== -1) { // Si --validate se encuentra en los argumentos
-  args.splice(validate, 1) // Elimina --validate de los argumentos
+  const unique = linkUnique.length
+  
+  console.log(`total: ${tolalLinks}`)
+  console.log(`unique: ${unique}`)
+  })
+}else if (validate) { // Si --validate se encuentra en los argumentos
+  args.splice(args.indexOf('--validate'), 1) // Elimina --validate de los argumentos
   mdLinks(args[0], true) // Ejecuta con validación
     .then((result) => {
       const formattedLinks = result.links.map((link) => `${link.file} ${link.href} ${link.ok || link.fail} ${link.status} ${link.text}`)
