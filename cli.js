@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { mdLinks } = require('./index.js')
+const kleur = require('kleur')
 
 const [,, ...args] = process.argv
 
@@ -25,9 +26,9 @@ if (stats && validate){
   const unique = linkUnique.length
   const linkFail = totalinksFail.length
 
-  console.log(`total: ${totalLinks}`)
-  console.log(`unique: ${unique}`)
-  console.log(`broken: ${linkFail}`)
+  console.log(`total: ${kleur.green(totalLinks)}`)
+  console.log(`unique: ${kleur.green(unique)}`)
+  console.log(`broken: ${kleur.green(linkFail)}`)
   })
 }
  else if(stats){
@@ -42,14 +43,19 @@ if (stats && validate){
   })
   const unique = linkUnique.length
   
-  console.log(`total: ${tolalLinks}`)
-  console.log(`unique: ${unique}`)
+  console.log(`total: ${kleur.green(tolalLinks)}`)
+  console.log(`unique: ${kleur.green(unique)}`)
   })
 }else if (validate) { // Si --validate se encuentra en los argumentos
   args.splice(args.indexOf('--validate'), 1) // Elimina --validate de los argumentos
   mdLinks(args[0], true) // Ejecuta con validación
     .then((result) => {
-      const formattedLinks = result.links.map((link) => `${link.file} ${link.href} ${link.ok || link.fail} ${link.status} ${link.text}`)
+      const formattedLinks = result.links.map((link) => {
+        const statusColor = link.ok ? kleur.green : kleur.red;
+        const statusText = link.ok ? link.ok : link.fail;
+  
+        return `${link.file} ${link.href} ${statusColor(statusText)} ${link.status} ${link.text}`;
+      })
       console.log(formattedLinks.join('\n'))
     })
     .catch((error) => {
