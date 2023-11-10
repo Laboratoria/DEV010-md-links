@@ -9,17 +9,34 @@ const options = process.argv;
 const validate = !!options.includes("--validate");
 const stats = !!options.includes("--stats"); */
 
-mdLinks("./examples.md")
+/* mdLinks("./examples.md", true)
   .then((links) => {
     console.log(links);
     // => [{ href, text, file }, ...]
   })
-  .catch(console.error);
+  .catch(console.error); */
 
-/* mdLinks("./thumb.png")
+/* mdLinks("./examples.md", true)
+  .then((links) => {
+    console.log(links);
+    // => [{ href, text, file, status, ok }, ...]
+  })
+  .catch(console.error);
+ */
+/* mdLinks("./examples.md", (validate = false))
   .then((links) => {
     console.log(links);
     // => [{ href, text, file }, ...]
   })
   .catch(console.error);
  */
+
+const mdLinksPromise = mdLinks("./examples.md", true);
+
+mdLinksPromise
+  .then((links) => {
+    console.log("Result:", links);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
