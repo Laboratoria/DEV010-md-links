@@ -22,13 +22,12 @@ const mdLinks = (path, validate = false) => { // (false) valor predeterminado de
               const textRex = /\[([^\]]+)\]\([^)]+\)/g // ([^\]]+) captura texto entre corchetes seguidos de  parentesis
               const textMatches = data.match(textRex) // se verifica si hay coincidencias entre el texto entre links y lo que esta dentro del corchete
               // console.log(textMatches)
-              if (textMatches) {
-                const linkPromises = links.map((link, index) => { // (map) transforma cada elemento de un arreglo y devuelve uno nuevo, (index) indice cambia a medida que se itera sobre los elementos
-                  link = link.slice(0, -2)
-                  const textMatch = textMatches[index].match(/\[([^\]]+)\]/) // busca y captura el texto entre corchetes
-                  const text = textMatch ? textMatch[1] : '' // (textMatch ?) forma abreviada de escribir una estructura condicional
                   if (validate) {
-                    return pathIsOk(link).then((status) => {
+                    const linkPromises = links.map((link, index) => {
+                      link = link.slice(0, -2)
+                      const textMatch = textMatches[index].match(/\[([^\]]+)\]/) // busca y captura el texto entre corchetes
+                      const text = textMatch ? textMatch[1] : '' 
+                      return pathIsOk(link).then((status) => {
                       if (status >= 200 && status < 400) {
                         return {
                           href: link,
@@ -36,7 +35,7 @@ const mdLinks = (path, validate = false) => { // (false) valor predeterminado de
                           file,
                           status,
                           ok: 'ok'
-                        }
+                        };
                       } else {
                         return {
                           href: link,
@@ -47,37 +46,47 @@ const mdLinks = (path, validate = false) => { // (false) valor predeterminado de
                         }
                       }
                     })
-                  } else {
+                  })
+  
+                  Promise.all(linkPromises).then((linkObjects) => {
+                    resolve({
+                      convertPath,
+                      isMarkdown: true,
+                      content: data,
+                      links: linkObjects
+                    })
+                  })
+                } else {
+                  const linkObjects = links.map((link, index) => {
+                    link = link.slice(0, -2);
+                    const textMatch = textMatches[index].match(/\[([^\]]+)\]/);
+                    const text = textMatch ? textMatch[1] : ''
                     return {
                       href: link,
                       text,
                       file
-                    }
-                  }
-                })
-                Promise.all(linkPromises).then((linkObjects) => {
+                    };
+                  });
+  
                   resolve({
                     convertPath,
                     isMarkdown: true,
                     content: data,
                     links: linkObjects
                   })
-                })
+                }
+              } else {
+                reject('No se encontraron link en el archivo')
               }
-            } else {
-              reject('No se encontraron link en el archivo')
             }
-          }
-        })
+          })
+        }
+      } else {
+        reject('la ruta no existe')
       }
-    } else {
-      reject('la ruta no existe')
-    }
+    })
   }
-  )
-}
-
-module.exports = {
-  mdLinks
-
-} 
+  
+  module.exports = {
+    mdLinks
+  }
