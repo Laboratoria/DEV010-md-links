@@ -37,7 +37,7 @@ te indicará cuál funciona de manera correcta y cuál no.
 
 Ejemplo:
 
-<img width="600" alt="validar si el link funciona" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%202.png">
+<img width="500" alt="validar si el link funciona" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%202.png">
 
 ### Número de links encontrados 
 
@@ -47,8 +47,8 @@ de links que no estén repetidos.
 
 Ejemplo:
 
-<img width="350" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--stats.png">
-<img width="600" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--%20stats.png">
+<img width="300" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--stats.png">
+<img width="500" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--%20stats.png">
 
 ###  Número de links encontrados y número de links que no funcionan
 
@@ -58,8 +58,8 @@ links que están en el archivo no funcionan.
 
 Ejemplo: 
 
-<img width="350" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--stats.png">
-<img width="600" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--%20stats.png">
+<img width="300" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--stats.png">
+<img width="500" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--%20stats.png">
 
 ## 3. Requerimientos del sistema 
 
