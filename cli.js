@@ -28,7 +28,7 @@ if (stats && validate){
 
   console.log(`total: ${kleur.green(totalLinks)}`)
   console.log(`unique: ${kleur.green(unique)}`)
-  console.log(`broken: ${kleur.green(linkFail)}`)
+  console.log(`broken: ${kleur.red(linkFail)}`)
   })
 }
  else if(stats){
