@@ -25,8 +25,8 @@ Markdown de la siguiente manera, esto te traerá los enlaces que existen en la r
 ingresada.
 
 Ejemplo:
-<img width="100" alt="validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links.png">
-<img width="100" alt="respuesta validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links%202.png">
+<img width="200" alt="validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links.png">
+<img width="200" alt="respuesta validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links%202.png">
 
 ### Validar si el link funciona 
 
@@ -35,7 +35,7 @@ mdlinks2d ./example/markdown.md --validate, esto te traerá el link y
 te indicará cuál funciona de manera correcta y cuál no. 
 
 Ejemplo:
-<img width="100" alt="validar si el link funciona" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%202.png">
+<img width="200" alt="validar si el link funciona" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%202.png">
 
 ### Número de links encontrados 
 
@@ -44,8 +44,8 @@ links en total encuentras en el archivo que envíes, también te indicara un tot
 de links que no estén repetidos.
 
 Ejemplo:
-<img width="100" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--stats.png">
-<img width="100" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--%20stats.png">
+<img width="200" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--stats.png">
+<img width="200" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--%20stats.png">
 
 ###  Número de links encontrados y número de links que no funcionan
 
@@ -54,8 +54,8 @@ traer la cantidad total de los links, también  te indica cuantos de los
 links que están en el archivo no funcionan.
 
 Ejemplo: 
-<img width="100" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--stats.png">
-<img width="100" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--%20stats.png">
+<img width="200" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--stats.png">
+<img width="200" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--%20stats.png">
 
 ## 3. Requerimientos del sistema 
 
