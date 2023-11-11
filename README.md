@@ -31,11 +31,12 @@ Ejemplo:
 
 ### Validar si el link funciona 
 
-Validar si el link funciona Para validar si el link funciona puedes ejecutar 
+Para validar si el link funciona puedes ejecutar 
 mdlinks2d ./example/markdown.md --validate, esto te traerá el link y 
 te indicará cuál funciona de manera correcta y cuál no. 
 
 Ejemplo:
+
 <img width="600" alt="validar si el link funciona" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%202.png">
 
 ### Número de links encontrados 
@@ -45,6 +46,7 @@ links en total encuentras en el archivo que envíes, también te indicara un tot
 de links que no estén repetidos.
 
 Ejemplo:
+
 <img width="350" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--stats.png">
 <img width="600" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--%20stats.png">
 
@@ -55,6 +57,7 @@ traer la cantidad total de los links, también  te indica cuantos de los
 links que están en el archivo no funcionan.
 
 Ejemplo: 
+
 <img width="350" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--stats.png">
 <img width="600" alt="Número de links encontrados " src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/--validate%20--%20stats.png">
 
