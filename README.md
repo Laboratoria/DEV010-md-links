@@ -25,8 +25,9 @@ Markdown de la siguiente manera, esto te traerá los enlaces que existen en la r
 ingresada.
 
 Ejemplo:
-<img width="300" alt="validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links.png">
-<img width="300" alt="respuesta validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links%202.png">
+
+<img width="400" alt="validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links.png">
+<img width="600" alt="respuesta validar enlaces" src="https://github.com/DianaJ-Dev/DEV010-md-links/blob/feature/funciones-Hito1/Imagenes/Mostrar%20links%202.png">
 
 ### Validar si el link funciona 
 
