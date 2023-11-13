@@ -17,11 +17,11 @@ const axios = require('axios');
          extLinksMD(absRouteTransform)
            .then((links) => {
              if (validate) {
-              getStatus(links)
-                .then((results) => console.log(results))
-                .catch((error) => console.log(colors.yellow(error)))
+              getStatus(links,route)
+                .then((result) => console.log(result))
+                .catch((error) => console.log(error))
             } else {
-              console.table(links)
+              console.log(links)
             }
             resolve(links)
            })
@@ -43,7 +43,7 @@ const axios = require('axios');
 
 
 
-  mdlinks("README.md", process.argv[2])
+  mdlinks("ReadmeExam.md", process.argv[2])
 
 
 module.exports = { mdlinks };

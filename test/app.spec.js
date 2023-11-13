@@ -2,18 +2,10 @@ const {
   isAbsolute,
   exist,
   isCompExt,
-  readFile,
   convertPath,
   extLinksMD,
 } = require("../lib/app.js");
 
-// describe('mdLinks', () => {
-//   it('debería resolver un arreglo con 3 links para un archivo .md con 3 links', () => {
-//     return mdLinks('miArchivo.md').then((result) => {
-//       expect...;
-//     });
-//   });
-// });
 describe("isAbsolute", () => {
   const routeABS = "C:/Laboratoria/Proyectos/DEV010-md-links/README.md";
   const routeREL = "README.md";
@@ -63,30 +55,15 @@ describe("isCompExt", () => {
     expect(isCompExt(routeFalse)).toBe(false);
   });
 
-  // it("deberia retornar true al ser una ruta compatible", ()=>{
-  //   expect(isCompExt(routeTrue)).toEqual(routeTrue));
-  // });
 });
-
-// describe("readFile", () => {
-//   it("debería ser una promesa", () => {
-//     expect(typeof readFile).toBe(typeof Promise);
-//   });
-
-//   it("debe leer el contenido de un archivo existente", async () => {
-//     const testredfile = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//     const contenido = await readFile("testReadFile.md");
-//     expect(contenido).toBe(testredfile);
-//   });
-// });
 
 describe("extLinksMD", () => {
   it("deberia ser una funcion", () => {
     expect(typeof extLinksMD).toBe("function");
   });
 
-  const rutaPrueba = "testPrueba.md";
   it("deberia retornar un array con los links", async () => {
+    const rutaPrueba = "testPrueba.md";
     const arrayLinks = [
       {
         href: "https://es.wikipedia.org/wiki/Markdown",
@@ -97,4 +74,5 @@ describe("extLinksMD", () => {
     const result = await extLinksMD(rutaPrueba);
     expect(result).toEqual(arrayLinks);
   });
+
 });
