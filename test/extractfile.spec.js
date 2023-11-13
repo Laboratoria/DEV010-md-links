@@ -7,7 +7,7 @@ describe("extractMarkdownLinks", () => {
     const content = "This is [a link](https://example.com) to an example site."; // Contenido de ejemplo que contiene un enlace Markdown.
     const expectedLinks = [
       // Lista de enlaces Markdown esperados en el contenido.
-      { linkText: "a link", linkUrl: "https://example.com" },
+      { linkText: "a link", href: "https://example.com", file: undefined },
     ];
     // Verifica que la función extractMarkdownLinks devuelva los enlaces Markdown esperados.
     expect(extractMarkdownLinks(content)).toEqual(expectedLinks);
@@ -19,8 +19,8 @@ describe("extractMarkdownLinks", () => {
       "Check out [Example](https://example.com) and [Google](https://google.com)."; // Contenido de ejemplo que contiene dos enlaces Markdown.
     const expectedLinks = [
       // Lista de enlaces Markdown esperados en el contenido.
-      { linkText: "Example", linkUrl: "https://example.com" },
-      { linkText: "Google", linkUrl: "https://google.com" },
+      { linkText: "Example", href: "https://example.com", file: undefined },
+      { linkText: "Google", href: "https://google.com", file: undefined },
     ];
     // Verifica que la función extractMarkdownLinks devuelva los enlaces Markdown esperados en el contenido con múltiples enlaces.
     expect(extractMarkdownLinks(content)).toEqual(expectedLinks);
