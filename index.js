@@ -43,7 +43,7 @@ const axios = require('axios');
 
 
 
-  mdlinks("ReadmeExam.md", process.argv[2])
+  mdlinks("README.md", process.argv[2])
 
 
 module.exports = { mdlinks };
