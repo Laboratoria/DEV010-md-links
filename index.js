@@ -9,12 +9,12 @@ const options = process.argv;
 const validate = !!options.includes("--validate");
 const stats = !!options.includes("--stats"); */
 
-/* mdLinks("./examples.md", true)
+mdLinks("./examples.md", true)
   .then((links) => {
     console.log(links);
     // => [{ href, text, file }, ...]
   })
-  .catch(console.error); */
+  .catch(console.error);
 
 /* mdLinks("./examples.md", true)
   .then((links) => {
@@ -31,7 +31,7 @@ const stats = !!options.includes("--stats"); */
   .catch(console.error);
  */
 
-const mdLinksPromise = mdLinks("./examples.md", true);
+/* const mdLinksPromise = mdLinks("./examples.md", true);
 
 mdLinksPromise
   .then((links) => {
@@ -40,3 +40,4 @@ mdLinksPromise
   .catch((error) => {
     console.error("Error:", error);
   });
+ */
