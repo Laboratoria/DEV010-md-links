@@ -35,11 +35,11 @@ describe("validateLinks", () => {
     // validateLinks(links).then((res) => (validateDataMock = res));
     Promise.all(resultValidate)
       .then((response) => {
-        console.log({ response });
+        // console.log({ response });
         expect(response).toEqual(resultDataMock);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
     done();
   });
@@ -66,11 +66,11 @@ describe("validateLinks", () => {
     const resultValidate = validateLinks(links);
     Promise.all(resultValidate)
       .then((response) => {
-        console.log({ response });
+        // console.log({ response });
       })
       .catch((error) => {
         expect(error).toEqual(resultDataMock);
-        console.log(error);
+        // console.log(error);
       });
     done();
   });
@@ -95,11 +95,11 @@ describe("validateLinks", () => {
 
     Promise.all(resultValidate)
       .then((response) => {
-        console.log({ response });
+        // console.log({ response });
         expect(response).toEqual(resultDataMock);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
     done();
   });
