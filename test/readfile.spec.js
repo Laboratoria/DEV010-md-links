@@ -55,18 +55,4 @@ describe("readMkdwnFile", () => {
     // Utiliza "expect" junto con "async/await" para verificar que la función readMkdwnFile resuelva con los mismos datos.
     await expect(readMkdwnFile(markdownFile)).resolves.toEqual(data);
   });
-
-  /* it(""),
-    () => {
-      const filePath = "./nonexistmarkadownfile.md";
-      readMkdwnFile(filePath)
-    }; */
-
-  // describe('Login',()=>{
-  //   it('logeo exitoso', ()=>{
-  //     const logeo = true
-
-  //     expect(logeo).toEqual(1)
-
-  //   })
 });
